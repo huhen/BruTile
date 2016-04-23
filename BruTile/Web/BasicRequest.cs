@@ -57,7 +57,7 @@ namespace BruTile.Web
         public BasicRequest(string urlFormatter, IEnumerable<string> serverNodes = null, string apiKey= null)
         {
             _urlFormatter = urlFormatter;
-            _serverNodes = serverNodes != null ? serverNodes.ToList() : null;
+            _serverNodes = serverNodes?.ToList();
 
             // for backward compatibility
             _urlFormatter = _urlFormatter.Replace("{0}", ZTag);

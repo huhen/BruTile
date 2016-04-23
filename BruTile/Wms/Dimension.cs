@@ -25,10 +25,10 @@ namespace BruTile.Wms
             Units = att.Value;
 
             att = el.Attribute("unitSymbol");
-            UnitSymbol = att != null ? att.Value : string.Empty;
+            UnitSymbol = att?.Value ?? string.Empty;
 
             att = el.Attribute("default");
-            Default = att != null ? att.Value : string.Empty;
+            Default = att?.Value ?? string.Empty;
 
             att = el.Attribute("multipleValues");
             if (att == null)

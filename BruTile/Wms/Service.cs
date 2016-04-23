@@ -45,7 +45,7 @@ namespace BruTile.Wms
             Title = element.Value;
 
             element = node.Element(XName.Get("Abstract", @namespace));
-            Abstract = element != null ? element.Value : string.Empty;
+            Abstract = element?.Value ?? string.Empty;
 
             element = node.Element(XName.Get("KeywordList", @namespace));
             if (element != null)
@@ -60,10 +60,10 @@ namespace BruTile.Wms
                 ContactInformation = new ContactInformation(element, @namespace);
 
             element = node.Element(XName.Get("Fees", @namespace));
-            Fees = element != null ? element.Value : string.Empty;
+            Fees = element?.Value ?? string.Empty;
 
             element = node.Element(XName.Get("AccessConstraints", @namespace));
-            AccessConstraints = element != null ? element.Value : string.Empty;
+            AccessConstraints = element?.Value ?? string.Empty;
 
             element = node.Element(XName.Get("LayerLimit", @namespace));
             if (element == null)

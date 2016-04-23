@@ -118,15 +118,7 @@ namespace BruTile.Cache
                 wasOpen = false;
             }
             
-            if (type == MbTilesType.None)
-            {
-                // Type (if defined)
-                _type = ReadType(connection);
-            }
-            else
-            {
-                _type = type;
-            }
+            _type = type == MbTilesType.None ? ReadType(connection) : type;
 
             if (schema == null)
             {
@@ -361,7 +353,7 @@ namespace BruTile.Cache
         public int[] DeclaredZoomLevels { get { return _declaredZoomLevels; } }
         */
 
-        internal static Extent MbTilesFullExtent { get { return new Extent(-180, -85, 180, 85); } }
+        internal static Extent MbTilesFullExtent => new Extent(-180, -85, 180, 85);
 
         internal static void Create(string connectionString,
             string name, MbTilesType type, double version, string description,
@@ -443,29 +435,17 @@ namespace BruTile.Cache
             return ret;
         }
 
-        internal ITileSchema TileSchema
-        {
-            get { return _schema; }
-        }
+        internal ITileSchema TileSchema => _schema;
 
         private readonly MbTilesFormat _format;
         private readonly MbTilesType _type;
         private readonly Extent _extent;
 
-        public MbTilesFormat Format
-        {
-            get { return _format; }
-        }
+        public MbTilesFormat Format => _format;
 
-        public MbTilesType Type
-        {
-            get { return _type; }
-        }
+        public MbTilesType Type => _type;
 
-        public Extent Extent
-        {
-            get { return _extent; }
-        }
+        public Extent Extent => _extent;
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {

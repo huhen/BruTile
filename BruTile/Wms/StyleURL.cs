@@ -16,7 +16,7 @@ namespace BruTile.Wms
         public StyleURL(XElement node, string @namespace)
         {
             var element = node.Element(XName.Get("Format", @namespace));
-            Format = element == null ? "png" : element.Value;
+            Format = element?.Value ?? "png";
 
             element = node.Element(XName.Get("OnlineResource", @namespace));
             if (element != null)

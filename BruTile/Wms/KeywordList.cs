@@ -25,14 +25,7 @@ namespace BruTile.Wms
 
         public List<Keyword> Keyword
         {
-            get
-            {
-                if (_keywordField == null)
-                {
-                    _keywordField = new List<Keyword>();
-                }
-                return _keywordField;
-            }
+            get { return _keywordField ?? (_keywordField = new List<Keyword>()); }
             set
             {
                 _keywordField = value;

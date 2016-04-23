@@ -9,7 +9,6 @@ namespace BruTile.Web
     public class HttpTileSource : ITileSource, IRequest
     {
         private readonly HttpTileProvider _provider;
-        private readonly ITileSchema _tileSchema;
 
         public  HttpTileSource(ITileSchema tileSchema, string urlFormatter, IEnumerable<string> serverNodes = null, 
             string apiKey = null, string name = null, IPersistentCache<byte[]> persistentCache = null, 
@@ -22,18 +21,18 @@ namespace BruTile.Web
             IPersistentCache<byte[]> persistentCache = null, Func<Uri, byte[]> tileFetcher = null)
         {
             _provider = new HttpTileProvider(request, persistentCache, tileFetcher);
-            _tileSchema = tileSchema;
+            Schema = tileSchema;
             Name = name ?? string.Empty;
         }
 
-        public IPersistentCache<byte[]> PersistentCache { get { return _provider.PersistentCache; } }
+        public IPersistentCache<byte[]> PersistentCache => _provider.PersistentCache;
 
         public Uri GetUri(TileInfo tileInfo)
         {
             return _provider.GetUri(tileInfo);
         }
 
-        public ITileSchema Schema { get { return _tileSchema;  } }
+        public ITileSchema Schema { get; }
 
         public string Name { get; set; }
 

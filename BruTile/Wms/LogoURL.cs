@@ -24,7 +24,7 @@ namespace BruTile.Wms
             Height = int.Parse(att.Value, NumberFormatInfo.InvariantInfo);
 
             var element = node.Element(XName.Get("Format", nameSpace));
-            Format = element == null ? "png" : element.Value;
+            Format = element?.Value ?? "png";
 
             element = node.Element(XName.Get("OnlineResource", nameSpace));
             if (element != null)

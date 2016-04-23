@@ -82,13 +82,7 @@ namespace BruTile.Wms
                                        : "WMS_Capability";
         }
 
-        public string Namespace
-        {
-            get
-            {
-                return Version < WmsVersionEnum.Version_1_3_0 ? string.Empty : WmsNamespaces.Wms;
-            }
-        }
+        public string Namespace => Version < WmsVersionEnum.Version_1_3_0 ? string.Empty : WmsNamespaces.Wms;
 
         public void WriteCapabilitiesDocType(XmlWriter writer)
         {
@@ -171,7 +165,7 @@ using (var writer = XmlWriter.Create("file.xml"))
             {
                 writer.WriteAttributeString("xmlns", "xlink", null, WmsNamespaces.Xlink);
                 writer.WriteAttributeString("xmlns", "xsi", null, WmsNamespaces.Xsi);
-                writer.WriteAttributeString("xsi", "schemaLocation", null, string.Format("{0}", WmsNamespaces.Wms));
+                writer.WriteAttributeString("xsi", "schemaLocation", null, $"{WmsNamespaces.Wms}");
                 writer.WriteStartElement("WMS_Capabilities", WmsNamespaces.Wms, WmsNamespaces.WmsSchemaUrl(Version, "capabilities"));
             }
             else

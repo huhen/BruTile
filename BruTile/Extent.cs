@@ -12,32 +12,17 @@ namespace BruTile
         public double MaxX { get; private set; }
         public double MaxY { get; private set; }
 
-        public double CenterX
-        {
-            get { return (MinX + MaxX)/2.0; }
-        }
+        public double CenterX => (MinX + MaxX) / 2.0;
 
-        public double CenterY
-        {
-            get { return (MinY + MaxY)/2.0; }
-        }
+        public double CenterY => (MinY + MaxY) / 2.0;
 
-        public double Width
-        {
-            get { return MaxX - MinX; }
-        }
+        public double Width => MaxX - MinX;
 
-        public double Height
-        {
-            get { return MaxY - MinY; }
-        }
+        public double Height => MaxY - MinY;
 
-        public double Area
-        {
-            get { return Width*Height; }
-        }
+        public double Area => Width * Height;
 
-        public Extent Intersect(Extent other) 
+        public Extent Intersect(Extent other)
         {
             return new Extent(
                 Math.Max(MinX, other.MinX),
@@ -80,7 +65,7 @@ namespace BruTile
             {
                 return false;
             }
-            return Equals((Extent) obj);
+            return Equals((Extent)obj);
         }
 
         public bool Equals(Extent extent)

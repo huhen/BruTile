@@ -100,13 +100,13 @@ namespace BruTile.Wms
             FixedHeight = att != null ? int.Parse(att.Value, NumberFormatInfo.InvariantInfo) : 0;
 
             var element = node.Element(XName.Get("Name", ns));
-            Name = element != null ? element.Value : string.Empty;
+            Name = element?.Value ?? string.Empty;
 
             element = node.Element(XName.Get("Title", ns));
-            Title = element != null ? element.Value : string.Empty;
+            Title = element?.Value ?? string.Empty;
 
             element = node.Element(XName.Get("Abstract", ns));
-            Abstract = element != null ? element.Value : string.Empty;
+            Abstract = element?.Value ?? string.Empty;
 
             element = node.Element(XName.Get("KeywordList", ns));
             if (element != null) _keywordListField = new KeywordList(element, ns);

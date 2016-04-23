@@ -32,7 +32,7 @@ namespace BruTile.Wmts
 
             using (var reader = new StreamReader(source))
                 capabilties = (Capabilities)ser.Deserialize(reader);
-            
+
             var tileSchemas = GetTileMatrixSets(capabilties.Contents.TileMatrixSet);
             var tileSources = GetLayers(capabilties, tileSchemas);
 
@@ -91,9 +91,9 @@ namespace BruTile.Wmts
 
                             var tileSource = new TileSource(new HttpTileProvider(wmtsRequest),
                                 tileSchema.CreateSpecific(title, identifier, @abstract, tileMatrixSet, styleName, format))
-                                {
-                                    Name = title
-                                };
+                            {
+                                Name = title
+                            };
 
                             tileSources.Add(tileSource);
                         }
@@ -104,7 +104,7 @@ namespace BruTile.Wmts
         }
 
 
-        private static IEnumerable<ResourceUrl> CreateResourceUrlsFromOperations(IEnumerable<Operation> operations, 
+        private static IEnumerable<ResourceUrl> CreateResourceUrlsFromOperations(IEnumerable<Operation> operations,
             string format, string version, string layer, string style, string tileMatrixSet)
         {
             var list = new List<KeyValuePair<string, string>>();
@@ -127,13 +127,13 @@ namespace BruTile.Wmts
             }
 
             return list.Select(s => new ResourceUrl
-                {
-                    Template = s.Key.ToLower() =="kvp" ? 
-                        CreateKvpFormatter(s.Value, format, version, layer, style, tileMatrixSet):
+            {
+                Template = s.Key.ToLower() == "kvp" ?
+                        CreateKvpFormatter(s.Value, format, version, layer, style, tileMatrixSet) :
                         CreateRestfulFormatter(s.Value, format, style, tileMatrixSet),
-                    ResourceType =  URLTemplateTypeResourceType.tile,
-                    Format = format
-                });
+                ResourceType = URLTemplateTypeResourceType.tile,
+                Format = format
+            });
         }
 
         private static string CreateRestfulFormatter(string baseUrl, string format, string style, string tileMatrixSet)
@@ -169,11 +169,11 @@ namespace BruTile.Wmts
                 var template = resourceUrl.template.Replace(WmtsRequest.TileMatrixSetTag, tileMatrixSet);
                 template = template.Replace(WmtsRequest.StyleTag, style);
                 resourceUrls.Add(new ResourceUrl
-                    {
-                        Format = resourceUrl.format,
-                        ResourceType = resourceUrl.resourceType,
-                        Template = template
-                    });
+                {
+                    Format = resourceUrl.format,
+                    ResourceType = resourceUrl.resourceType,
+                    Template = template
+                });
             }
             return resourceUrls;
         }
@@ -183,7 +183,7 @@ namespace BruTile.Wmts
         {
             // Get a set of well known scale sets. For these we don't need to have
             var wkss = new WellKnownScaleSets();
-            
+
             // Axis order registry
             var crsAxisOrder = new CrsAxisOrderRegistry();
             // Unit of measure registry
@@ -199,7 +199,7 @@ namespace BruTile.Wmts
 
                 // Try to parse the Crs
                 var supportedCrs = tileMatrixSet.SupportedCRS;
-                
+
                 // Hack to fix broken crs spec
                 supportedCrs = supportedCrs.Replace("6.18:3", "6.18.3");
 
@@ -289,16 +289,16 @@ namespace BruTile.Wmts
                 tileMatrix.Top);
         }
 
-        private static KeyValuePair<string, Resolution> ToResolution(Generated.TileMatrix tileMatrix, 
+        private static KeyValuePair<string, Resolution> ToResolution(Generated.TileMatrix tileMatrix,
             int[] ordinateOrder, double metersPerUnit = 1, ScaleSet ss = null)
         {
-            
+
             // Get the coordinates
             var coords = tileMatrix.TopLeftCorner.Trim().Split(' ');
-            
+
             // Try to get units per pixel from passed scale set
-            var unitsPerPixel = tileMatrix.ScaleDenominator*ScaleHint/metersPerUnit;
-            if (unitsPerPixel == 0 || double.IsNaN(unitsPerPixel))
+            var unitsPerPixel = tileMatrix.ScaleDenominator * ScaleHint / metersPerUnit;
+            if (double.IsNaN(unitsPerPixel) || unitsPerPixel == 0)
             {
                 if (ss == null)
                     throw new ArgumentNullException();
@@ -312,13 +312,13 @@ namespace BruTile.Wmts
                     unitsPerPixel,
                     tileMatrix.TileWidth,
                     tileMatrix.TileHeight,
-                    Convert.ToDouble(coords[ordinateOrder[0]], 
-                    CultureInfo.InvariantCulture), 
-                    Convert.ToDouble(coords[ordinateOrder[1]], 
+                    Convert.ToDouble(coords[ordinateOrder[0]],
+                    CultureInfo.InvariantCulture),
+                    Convert.ToDouble(coords[ordinateOrder[1]],
                     CultureInfo.InvariantCulture),
                     tileMatrix.MatrixWidth,
                     tileMatrix.MatrixHeight,
                     tileMatrix.ScaleDenominator));
-          }
+        }
     }
 }

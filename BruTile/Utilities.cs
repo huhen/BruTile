@@ -79,8 +79,8 @@ namespace BruTile
             }
         }
 
-        public static string DefaultUserAgent { get { return "BruTile/" + Version; } }
+        public static string DefaultUserAgent => "BruTile/" + Version;
 
-        public static string DefaultReferer { get { return string.Empty; } }
+        public static string DefaultReferer => string.Empty;
     }
 }

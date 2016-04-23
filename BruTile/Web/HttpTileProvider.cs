@@ -19,10 +19,7 @@ namespace BruTile.Web
             _fetchTile = fetchTile ?? (RequestHelper.FetchImage);
         }
 
-        public IPersistentCache<byte[]> PersistentCache
-        {
-            get { return _persistentCache; }
-        }
+        public IPersistentCache<byte[]> PersistentCache => _persistentCache;
 
         public Uri GetUri(TileInfo tileInfo)
         {
@@ -31,11 +28,11 @@ namespace BruTile.Web
 
         public byte[] GetTile(TileInfo tileInfo)
         {
-            var bytes = PersistentCache.Find(tileInfo.Index);
+            var bytes = _persistentCache.Find(tileInfo.Index);
             if (bytes == null)
             {
                 bytes = _fetchTile(_request.GetUri(tileInfo));
-                if (bytes != null) PersistentCache.Add(tileInfo.Index, bytes);
+                if (bytes != null) _persistentCache.Add(tileInfo.Index, bytes);
             }
             return bytes;
         }

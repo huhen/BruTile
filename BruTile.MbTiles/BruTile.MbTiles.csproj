@@ -91,6 +91,10 @@
       <Project>{2f6d9e1c-2001-40c8-89ba-fdf8597bb719}</Project>
       <Name>BruTile.Desktop</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BruTile\BruTile.csproj">
+      <Project>{e7fb8594-524b-4cfc-8c29-d3efcd1d3009}</Project>
+      <Name>BruTile</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\BruTile\BruTile.licenseheader">

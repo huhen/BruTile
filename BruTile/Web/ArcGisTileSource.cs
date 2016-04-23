@@ -12,8 +12,8 @@ namespace BruTile.Web
         public string BaseUrl { get; private set; }
 
         public ArcGisTileSource(
-                string baseUrl, 
-                ITileSchema schema, 
+                string baseUrl,
+                ITileSchema schema,
                 IPersistentCache<byte[]> persistentCache = null,
                 Func<Uri, byte[]> fetchTile = null)
             : base(new HttpTileProvider(CreateArcGISRequest(baseUrl), persistentCache, fetchTile), schema)
@@ -23,7 +23,7 @@ namespace BruTile.Web
 
         private static IRequest CreateArcGISRequest(string baseUrl)
         {
-            return new BasicRequest($"{baseUrl}/tile/{"{0}/{2}/{1}"}");
+            return new BasicRequest($"{baseUrl}/tile/" + "{0}/{2}/{1}");
         }
     }
 }

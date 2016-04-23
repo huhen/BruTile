@@ -13,9 +13,9 @@ namespace BruTile.Wmts
         private readonly string _version;
         private readonly string _identifier;
 
-        public static bool TryParse(string urn_ogc_def_crs, out CrsIdentifier crs)
+        public static bool TryParse(string urnOgcDefCRS, out CrsIdentifier crs)
         {
-            var parts = urn_ogc_def_crs.Split(':');
+            var parts = urnOgcDefCRS.Split(':');
             switch (parts.Length)
             {
                 case 6:
@@ -48,37 +48,28 @@ namespace BruTile.Wmts
         /// <summary>
         /// The authority
         /// </summary>
-        public string Authority
-        {
-            get { return _authority; }
-        }
+        public string Authority => _authority;
 
         /// <summary>
         /// The identifier
         /// </summary>
-        public string Identifier
-        {
-            get { return _identifier; }
-        }
+        public string Identifier => _identifier;
 
         /// <summary>
         /// The version
         /// </summary>
-        public string Version
-        {
-            get { return _version; }
-        }
+        public string Version => _version;
 
         public override string ToString()
         {
-            return string.Format("urn:ogc:def:crs:{0}:{1}:{2}", Authority, Version, Identifier);
+            return string.Format("urn:ogc:def:crs:{0}:{1}:{2}", _authority, _version, _identifier);
         }
 
         public bool Equals(CrsIdentifier other)
         {
-            if (Authority != other.Authority) return false;
-            if (Version != other.Version) return false;
-            if (Identifier != other.Identifier) return false;
+            if (_authority != other.Authority) return false;
+            if (_version != other.Version) return false;
+            if (_identifier != other.Identifier) return false;
             return true;
         }
     }

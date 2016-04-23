@@ -10,20 +10,11 @@ namespace BruTile
         private readonly int _row;
         private readonly string _level;
         
-        public int Col
-        {
-            get { return _col; }
-        }
+        public int Col => _col;
 
-        public int Row
-        {
-            get { return _row; }
-        }
+        public int Row => _row;
 
-        public string Level
-        {
-            get { return _level; }
-        }
+        public string Level => _level;
 
         public TileIndex(int col, int row, string level)
         {
@@ -65,7 +56,7 @@ namespace BruTile
 
         public override int GetHashCode()
         {
-            return _col ^ _row ^ ((_level == null) ? 0 : _level.GetHashCode());
+            return _col ^ _row ^ (_level?.GetHashCode() ?? 0);
         }
 
         public static bool operator ==(TileIndex key1, TileIndex key2)

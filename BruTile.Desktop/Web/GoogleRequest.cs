@@ -369,7 +369,7 @@ namespace BruTile.Web
                                         int count = gc.Count;
                                         if (count > 0)
                                         {
-                                            _versionGoogleMap = string.Format("m@{0}", gc[1].Value);
+                                            _versionGoogleMap = $"m@{gc[1].Value}";
                                             //VersionGoogleMapChina = VersionGoogleMap;
                                             Debug.WriteLine("TryCorrectGoogleVersions, VersionGoogleMap: " +
                                                             _versionGoogleMap);
@@ -391,7 +391,7 @@ namespace BruTile.Web
                                         int count = gc.Count;
                                         if (count > 0)
                                         {
-                                            _versionGoogleLabels = string.Format("h@{0}", gc[1].Value);
+                                            _versionGoogleLabels = $"h@{gc[1].Value}";
                                             //VersionGoogleLabelsChina = VersionGoogleLabels;
                                             Debug.WriteLine("TryCorrectGoogleVersions, VersionGoogleLabels: " +
                                                             _versionGoogleLabels);
@@ -423,8 +423,7 @@ namespace BruTile.Web
                                         int count = gc.Count;
                                         if (count > 1)
                                         {
-                                            _versionGoogleTerrain = string.Format("t@{0},r@{1}", gc[1].Value,
-                                                                                 gc[2].Value);
+                                            _versionGoogleTerrain = $"t@{gc[1].Value},r@{gc[2].Value}";
                                             //VersionGoogleTerrainChina = VersionGoogleTerrain;
                                             Debug.WriteLine(
                                                 "TryCorrectGoogleVersions, VersionGoogleTerrain: " +

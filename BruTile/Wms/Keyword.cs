@@ -18,7 +18,7 @@ namespace BruTile.Wms
         public Keyword(XElement node, string @namespace)
         {
             var att = node.Attribute(XName.Get("Vocabulary", @namespace));
-            Vocabulary = att != null ? att.Value : string.Empty;
+            Vocabulary = att?.Value ?? string.Empty;
 
             Value = node.Value;
         }

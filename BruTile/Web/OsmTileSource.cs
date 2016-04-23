@@ -40,6 +40,6 @@ namespace BruTile.Web
             }
         }
 
-        public Extent Extent { get { return Schema.Extent; } }
+        public Extent Extent => Schema.Extent;
     }
 }

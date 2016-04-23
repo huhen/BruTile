@@ -70,26 +70,28 @@ namespace BruTile.Tms
             {
                 error = ex;
             }
-            if (callback != null) callback(tileSource, error);
+            callback?.Invoke(tileSource, error);
         }
 
         private static TileSchema CreateSchema(TileMap tileMap)
         {
-            var schema = new TileSchema();
-            schema.OriginX = double.Parse(tileMap.Origin.x, CultureInfo.InvariantCulture);
-            schema.OriginY = double.Parse(tileMap.Origin.y, CultureInfo.InvariantCulture);
-            schema.Srs = tileMap.SRS;
+            var schema = new TileSchema
+            {
+                OriginX = double.Parse(tileMap.Origin.x, CultureInfo.InvariantCulture),
+                OriginY = double.Parse(tileMap.Origin.y, CultureInfo.InvariantCulture),
+                Srs = tileMap.SRS,
+                Name = tileMap.Title,
+                Format = tileMap.TileFormat.extension,
+                YAxis = YAxis.TMS,
+                Extent = new Extent(
+                    double.Parse(tileMap.BoundingBox.minx, CultureInfo.InvariantCulture),
+                    double.Parse(tileMap.BoundingBox.miny, CultureInfo.InvariantCulture),
+                    double.Parse(tileMap.BoundingBox.maxx, CultureInfo.InvariantCulture),
+                    double.Parse(tileMap.BoundingBox.maxy, CultureInfo.InvariantCulture))
+            };
+
             var tileWidth = int.Parse(tileMap.TileFormat.width);
             var tileHeight = int.Parse(tileMap.TileFormat.height);
-            schema.Name = tileMap.Title;
-            schema.Format = tileMap.TileFormat.extension;
-            schema.YAxis = YAxis.TMS;
-            schema.Extent = new Extent(
-                double.Parse(tileMap.BoundingBox.minx, CultureInfo.InvariantCulture),
-                double.Parse(tileMap.BoundingBox.miny, CultureInfo.InvariantCulture),
-                double.Parse(tileMap.BoundingBox.maxx, CultureInfo.InvariantCulture),
-                double.Parse(tileMap.BoundingBox.maxy, CultureInfo.InvariantCulture));
-
 
             foreach (var tileSet in tileMap.TileSets.TileSet)
             {

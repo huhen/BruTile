@@ -15,10 +15,10 @@ namespace BruTile.Wms
         public ServiceException(XElement node, string @namespace)
         {
             var att = node.Attribute("code");
-            Code = att != null ? att.Value : string.Empty;
+            Code = att?.Value ?? string.Empty;
 
             att = node.Attribute("locator");
-            Locator = att != null ? att.Value : string.Empty;
+            Locator = att?.Value ?? string.Empty;
 
             Value = node.Value;
         }

@@ -165,7 +165,7 @@ namespace BruTile.Cache
         public readonly TConnection Connection;
 
         [NonSerialized]
-        private readonly DecorateDbObjects _decorator = (parent, child) => string.Format("\"{0}\".\"{1}\"", parent, child);
+        private readonly DecorateDbObjects _decorator = (parent, child) => $"\"{parent}\".\"{child}\"";
 
         private readonly IDbCommand _addTileCommand;
         private readonly IDbCommand _removeTileCommand;
@@ -183,7 +183,7 @@ namespace BruTile.Cache
         private readonly BankOfSelectTileCommands _bank;
 
         public DbCache(TConnection connection)
-            : this(connection, (parent, child) => string.Format("[{0}].[{1}]", parent, child), "public", "Tiles")
+            : this(connection, (parent, child) => $"[{parent}].[{child}]", "public", "Tiles")
         {
         }
 
@@ -237,8 +237,7 @@ namespace BruTile.Cache
         public virtual void Clear(Int32 level)
         {
             DbCommand cmd = Connection.CreateCommand();
-            cmd.CommandText = String.Format("DELETE FROM {0} WHERE {1}={2};", _decorator(Schema, Table),
-                                            _decorator(Table, "Level"), level);
+            cmd.CommandText = $"DELETE FROM {_decorator(Schema, Table)} WHERE {_decorator(Table, "Level")}={level};";
 
             Boolean wasClosed = OpenConnectionIfClosed();
             cmd.ExecuteNonQuery();
@@ -249,7 +248,7 @@ namespace BruTile.Cache
         public void Clear()
         {
             DbCommand cmd = Connection.CreateCommand();
-            cmd.CommandText = String.Format("DELETE FROM {0};", _decorator(Schema, Table));
+            cmd.CommandText = $"DELETE FROM {_decorator(Schema, Table)};";
 
             Boolean wasClosed = OpenConnectionIfClosed();
             cmd.ExecuteNonQuery();
