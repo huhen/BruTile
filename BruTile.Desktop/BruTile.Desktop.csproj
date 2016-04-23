@@ -37,6 +37,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>BruTile.Desktop.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,15 +61,10 @@
     <Compile Include="Web\GoogleTileSource.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BruTile\BruTile.csproj">
-      <Project>{9FB60E2D-C682-4A01-9584-8B495B8DA85A}</Project>
-      <Name>BruTile</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\BruTile\BruTile.licenseheader">
       <Link>BruTile.licenseheader</Link>
     </None>
+    <None Include="BruTile.Desktop.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
